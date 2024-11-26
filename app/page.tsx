@@ -1,101 +1,110 @@
-import Image from "next/image";
+'use client'
+import ExploreCategories from "@/component/interest";
+import Location from "@/component/location";
+import { Fragment, useState } from "react";
+
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [activeStep, setActiveStep] = useState(1);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const handleStepChange = (step: number) => {
+    setActiveStep(step);
+  };
+
+  const handleClickNext = () => {
+    setActiveStep(2);
+  }
+
+  return (
+    <Fragment>
+      <div className="flex justify-center items-center space-x-4 mt-32">
+        {/* Step 1: Personal Details */}
+        <div
+          className={`flex items-center px-5 py-3 border rounded-full cursor-pointer ${activeStep === 1
+            ? "border-purple-600"
+            : "border-gray-300"
+            }`}
+          onClick={() => handleStepChange(1)}
+        >
+          <div
+            className={`rounded-full flex items-center justify-center w-8 h-8 cursor-pointer ${activeStep === 1
+              ? "bg-purple-600 text-white"
+              : "border-2 border-purple-600 text-purple-600"
+              }`}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            {activeStep > 1 ? "✓" : "1"}
+          </div>
+          <span
+            className={`ml-2 font-medium ${activeStep === 1 ? "text-purple-600" : ""
+              }`}
           >
-            Read our docs
-          </a>
+            Location Details
+          </span>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* Step Divider */}
+        <div className="h-px w-10 bg-gray-300"></div>
+
+        <div
+          className={`flex items-center px-5 py-3 border rounded-full cursor-pointer ${activeStep === 2
+            ? "border-purple-600"
+            : "border-gray-300"
+            }`}
+          onClick={() => handleStepChange(2)} 
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <div
+            className={`rounded-full flex items-center justify-center w-8 h-8  ${activeStep === 2
+              ? "bg-purple-600 text-white"
+              : "border-2 border-purple-600 text-purple-600"
+              }`}
+          >
+            {activeStep > 2 ? "✓" : "2"}
+          </div>
+          <span
+            className={`ml-2 font-medium ${activeStep === 2 ? "text-purple-600" : ""
+              }`}
+          >
+            Explore Categories
+          </span>
+        </div>
+
+        {/* Step Divider */}
+        <div className="h-px w-10 bg-gray-300"></div>
+
+        {/* Step 3: Date and Time */}
+        <div
+          className={`flex items-center px-5 py-3 border rounded-full cursor-pointer ${activeStep === 3
+            ? "border-purple-600"
+            : "border-gray-300"
+            }`}
+          onClick={() => handleStepChange(3)}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <div
+            className={`rounded-full flex items-center justify-center w-8 h-8 ${activeStep === 3
+              ? "bg-purple-600 text-white"
+              : "border-2 border-purple-600 text-purple-600"
+              }`}
+          >
+            {activeStep > 3 ? "✓" : "3"}
+          </div>
+          <span
+            className={`ml-2 font-medium ${activeStep === 3 ? "text-purple-600" : ""
+              }`}
+          >
+            Date and Time
+          </span>
+        </div>
+      </div>
+      {activeStep === 1 && <Location />}
+      {activeStep === 2 && <ExploreCategories />}
+      <div className="mt-8 my-8 mr-36 flex justify-end space-x-4">
+        <button className="px-8 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
+          Back
+        </button>
+        <button className="px-8 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700" onClick={handleClickNext}>
+          Next
+        </button>
+      </div>
+    </Fragment>
   );
 }
