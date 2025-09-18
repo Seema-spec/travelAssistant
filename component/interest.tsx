@@ -48,7 +48,7 @@ export default function ExploreCategories() {
 
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {categories.map((category, index) => (
-            <div key={index} className="group relative bg-gray-100 rounded-lg overflow-hidden shadow-lg group-hover:opacity-75 transition duration-300 ease-in-out">
+            <div key={index} className="group relative bg-gray-100 rounded-lg overflow-hidden shadow-lg group-hover:opacity-75 transition duration-300 ease-in-out"  onClick={() => toggleSelectCategory(category.name)}>
               <img
                 src={category.image}
                 alt={category.name}
@@ -60,7 +60,7 @@ export default function ExploreCategories() {
                       ? "bg-purple-600 border-purple-600 text-white"
                       : "bg-white border-gray-300 text-gray-600"
                   }`}
-                  onClick={() => toggleSelectCategory(category.name)}
+                 
                 >
                   {selectedCategory.includes(category.name) ? "✓" : ""}
                 </div>

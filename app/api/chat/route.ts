@@ -6,7 +6,8 @@ export async function POST(req:any) {
   const { message } = await req.json();
 
   const apiKey = process.env.OPENAI_API_KEY;
-
+  console.log(apiKey,"+++++++++++++++++++++++");
+  
   try {
     await delay(10000);
     const response = await axios.post(
