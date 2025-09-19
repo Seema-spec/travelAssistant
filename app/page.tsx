@@ -9,7 +9,7 @@ import { Loader2 } from "lucide-react";
 
 export default function Home() {
   const [activeStep, setActiveStep] = useState(1);
-  const { isLoading, handleSubmit } = useLocation();
+  const {isLoading, handleSubmit } = useLocation();
 
   const handleStepChange = (step: number) => {
     setActiveStep(step);
@@ -102,7 +102,7 @@ export default function Home() {
               <button className="px-8 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700" onClick={handleClickNext}>
                 Next
               </button> :
-              <button className="px-8 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700" onClick={handleSubmit}>
+              <button className="px-8 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"  onClick={() => handleSubmit()}>
                 {isLoading ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />

@@ -7,10 +7,16 @@ interface LocationContextType {
   selectedLocations: string[];
   selectedCategory: string[];
   selectedDates: string[];
-  budget: string;
-  toggleSelectLocation: (value: string) => void;
+  budget: string | undefined;
+  isLoading: boolean;
+  itineraryData: string | undefined;
+  toggleSelectLocation: (id: string) => void;
   toggleSelectDate: (value: string) => void;
   toggleSelectCategory: (value: string) => void;
+  handleSubmit: (event?: React.MouseEvent<HTMLButtonElement>) => void;
+  setBudget: (value: string | undefined) => void;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setItineraryData: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const LocationContext = createContext<LocationContextType | undefined>(undefined);
@@ -20,7 +26,7 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [selectedDates, setSelectedDates] = useState<string[]>([]);
   const [itineraryData, setItineraryData] = useState<string>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [budget, setBudget] = useState<string>();
   const router = useRouter();
 
@@ -45,7 +51,7 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event?: React.MouseEvent<HTMLButtonElement>)=> {
     setIsLoading(true);
     const message = `Can you provide me with a detailed **budget-friendly itinerary** for these dates: ${selectedDates.join(
       ", "
@@ -84,9 +90,25 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <LocationContext.Provider value={{ budget, setBudget, selectedLocations, selectedDates, selectedCategory, toggleSelectDate, toggleSelectCategory, toggleSelectLocation, isLoading, setIsLoading, itineraryData, setItineraryData, handleSubmit }}>
-      {children}
-    </LocationContext.Provider>
+    <LocationContext.Provider
+  value={{
+    budget,
+    isLoading,
+    setBudget,
+    selectedLocations,
+    selectedDates,
+    selectedCategory,
+    toggleSelectDate,
+    toggleSelectCategory,
+    toggleSelectLocation,
+    setIsLoading,
+    itineraryData,
+    setItineraryData,
+    handleSubmit,
+  }}
+>
+  {children}
+</LocationContext.Provider>
   );
 }
 
