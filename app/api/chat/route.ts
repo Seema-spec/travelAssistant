@@ -30,10 +30,10 @@ export async function POST(req:any) {
       JSON.stringify({ response: response.data.choices[0].message.content }),
       { status: 200 }
     );
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    console.error(error.response?.data || error.message);
     return new Response(
-      JSON.stringify({ error: 'Failed to fetch response from OpenAI' }),
+      JSON.stringify({ error: error.response?.data || error.message }),
       { status: 500 }
     );
   }
