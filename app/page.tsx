@@ -94,7 +94,7 @@ export default function Home() {
           {activeStep === 1 && <Location />}
           {activeStep === 2 && <ExploreCategories />}
           {activeStep === 3 && <DateAndTime />}
-          <div className="mt-8 flex justify-center space-x-4 w-full max-w-3xl">
+          <div className="mt-8 flex justify-center space-x-4 w-full">
             <button className="px-8 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
               Back
             </button>
@@ -105,8 +105,7 @@ export default function Home() {
               <button className="px-8 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"  onClick={() => handleSubmit()}>
                 {isLoading ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    Saving...
+                    <Loader2 className="h-6 w-6 animate-spin" />
                   </>
                 ) : (
                   "Save"
